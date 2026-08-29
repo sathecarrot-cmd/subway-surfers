@@ -179,7 +179,6 @@
     let isSpeedBoostActive = false;
     let speedBoostTimer = 0;
 
-    let particles = [];
     let sceneryBuildings = [];
     let roadsidePillars = [];
 
@@ -261,7 +260,6 @@
     let coins = [];
     let powerups = [];
     let nextSpawnZ = -30;
-    let nextSceneryZ = -20;
 
     function spawnSceneryPair(zPos) {
       const rainbowColors = [0xff0055, 0xff7700, 0xffff00, 0x00ff66, 0x00ffff, 0x7f00ff, 0xff00ff];
@@ -606,7 +604,8 @@
           roadsidePillars.forEach(p => p.position.z -= 300);
         }
 
-        if (nextSpawnZ + player.position.z > -250) {
+        // Continuous infinite obstacle generation loop
+        while (nextSpawnZ > player.position.z - 300) {
           spawnBatch();
         }
 
